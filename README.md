@@ -17,13 +17,13 @@
 
 ## Current Stage
 
-The project is currently at **[Phase 1](#🎯-phase-1-project-setup)**.
+The project is currently at **[Phase 2](#✍-phase-2-data-models)**.
 
 ## 🎯 Phase 1: Project Setup
 
 - [✅] Initialize Git repo & setup base folder structure.
-- [ ] Install dependencies.
-- [ ] Setup Prettier, ESLint, and basic formatting tools.
+- [✅] Install dependencies.
+- [✅] Setup Prettier, ESLint, and basic formatting tools.
 
 ---
 
