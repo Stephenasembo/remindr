@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String      @id @default(uuid())
+  username   String      @unique
+  email      String      @unique
+  password   String
+  createdAt  DateTime    @default(now())
+  reminders  Reminder[]  @relation("reminder_sender")
+  apiKey     ApiKey?     @relation("user_api_key")
+  recipients Recipient[] @relation("recipient")
+  sender     Profile?    @relation("sender")
+
+  @@map("users")
+}
+
+model Recipient {
+  id        String     @id @default(uuid())
+  name      String?
+  email     String?
+  phone     String?
+  user      User       @relation("recipient", fields: [userId], references: [id], onDelete: Cascade)
+  userId    String     @map("user_id")
+  reminders Reminder[] @relation("reminder_recipient")
+
+  @@map("recipients")
+}
+
+model Profile {
+  id     String  @id @default(uuid())
+  name   String?
+  email  String?
+  phone  String?
+  user   User    @relation("sender", fields: [userId], references: [id], onDelete: Cascade)
+  userId String  @unique @map("user_id")
+
+  @@map("profiles")
+}
+
+model Reminder {
+  id          String       @id @default(uuid())
+  title       String
+  content     String?
+  dueDate     DateTime     @map("due_date")
+  recurring   Boolean      @default(false)
+  interval    String?
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime?    @map("updated_at")
+  isDue       Boolean      @default(false) @map("is_due")
+  recipient   Recipient    @relation("reminder_recipient", fields: [recipientId], references: [id])
+  recipientId String       @map("recipient_id")
+  channel     Channel      @default(EMAIL)
+  status      Status       @default(NOT_SENT)
+  sender      User         @relation("reminder_sender", fields: [senderId], references: [id], onDelete: Cascade)
+  senderId    String       @map("sender_id")
+  log         ReminderLog? @relation("reminder_log")
+  logId       String       @map("log_id")
+
+  @@map("reminders")
+}
+
+model ReminderLog {
+  id         String   @id @default(uuid())
+  reminder   Reminder @relation("reminder_log", fields: [reminderId], references: [id])
+  reminderId String   @unique @map("reminder_id")
+  status     Status
+  timestamp  DateTime @default(now())
+  message    String?
+
+  @@map("reminder_log")
+}
+
+model ApiKey {
+  id         String    @id @default(uuid())
+  key        String    @unique
+  user       User      @relation("user_api_key", fields: [userId], references: [id], onDelete: Cascade)
+  userId     String    @unique @map("user_id")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  lastUsedAt DateTime? @map("last_used_at")
+  apiHits    Int       @map("api_hits")
+  isActive   Boolean   @default(true) @map("is_active")
+}
+
+enum Status {
+  SENT
+  FAILED
+  NOT_SENT
+  DELETED
+}
+
+enum Channel {
+  EMAIL
+  TEXT
+}
