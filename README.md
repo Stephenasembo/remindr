@@ -5,19 +5,19 @@
 ## ✅ Modular Reminder System Roadmap
 
 - [Current Stage](#current-stage)
-- [Project Setup](#🎯-phase-1-project-setup)
-- [Data Models](#✍-phase-2-data-models)
-- [Express App Setup](#️⚙️-phase-3-express-app-setup)
-- [Authentication](#🔐-phase-4-authentication)
-- [Reminder System Logic](#📬-phase-5-reminder-system-logic)
-- [Scheduler And Notification Service](#⏰-phase-6-scheduler-and-notification-service)
-- [Testing](#🧪-phase-7-testing)
-- [Final Touches](#🚀-phase-8-final-touches)
-- [MVP And Beyond](#🔮-phase-9-mvp-and-beyond)
+- [Project Setup](#phase-1-project-setup)
+- [Data Models](#phase-2-data-models)
+- [Express App Setup](#️phase-3-express-app-setup)
+- [Authentication](#phase-4-authentication)
+- [Reminder System Logic](#phase-5-reminder-system-logic)
+- [Scheduler And Notification Service](#phase-6-scheduler-and-notification-service)
+- [Testing](#phase-7-testing)
+- [Final Touches](#phase-8-final-touches)
+- [MVP And Beyond](#🔮phase-9-mvp-and-beyond)
 
 ## Current Stage
 
-The project is currently at **[Phase 2](#✍-phase-2-data-models)**.
+The project is currently at **[Phase 3](#️phase-3-express-app-setup)**.
 
 ## 🎯 Phase 1: Project Setup
 
@@ -29,8 +29,8 @@ The project is currently at **[Phase 2](#✍-phase-2-data-models)**.
 
 ## ✍ Phase 2: Data Models
 
-- [ ] Design data models.
-- [ ] Setup Prisma ORM.
+- [✅] Design data models.
+- [✅] Setup Prisma ORM.
 
 ---
 
