@@ -91,4 +91,18 @@ describe('User login', () => {
     expect(res.headers['content-type']).toMatch(/json/);
     expect(res.body.message).toMatch(/empty/);
   });
+
+  it('fails on wrong password entry', async () => {
+    const res = await request(app)
+      .post('/auth/login')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send({
+        username: 'Stephen',
+        password: 'abc',
+      });
+    expect(res.status).toBe(401);
+    expect(res.headers['content-type']).toMatch(/json/);
+    expect(res.body.message).toMatch(/wrong password/i);
+  });
 });
