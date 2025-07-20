@@ -17,7 +17,7 @@
 
 ## Current Stage
 
-The project is currently at **[Phase 3](#-phase-4-authentication)**.
+The project is currently at **[Phase 4](#-phase-4-authentication)**.
 
 ## 🎯 Phase 1: Project Setup
 
