@@ -29,4 +29,18 @@ describe('User registration', () => {
     expect(res.status).not.toBe(200);
     expect(res.headers['content-type']).toMatch(/json/);
   });
+
+  it('rejects empty fields', async () => {
+    const res = await request(app)
+      .post('/auth/register')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send({
+        username: 'Mel',
+        password: '',
+      });
+    expect(res.status).toBe(401);
+    expect(res.headers['content-type']).toMatch(/json/);
+    expect(res.body.message).toMatch(/empty/);
+  });
 });
