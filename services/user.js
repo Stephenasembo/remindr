@@ -43,8 +43,14 @@ async function findUser(id, username = null) {
     if (id) where.id = id;
     else if (username) where.username = username;
     const user = await client.user.findUnique({ where });
+    if (!user) {
+      throw new CustomError(401, 'Invalid Input Error', 'User not found.');
+    }
     return user;
   } catch (err) {
+    if (err instanceof CustomError) {
+      throw err;
+    }
     throw new CustomError(500, 'Database Error', 'Error on finding user.');
   }
 }

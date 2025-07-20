@@ -45,9 +45,9 @@ The project is currently at **[Phase 4](#-phase-4-authentication)**.
 
 ## 🔐 Phase 4: Authentication
 
-- [ ] Implement user registration.
-- [ ] Implement user login.
-- [ ] Generate JWT.
+- [✅] Implement user registration.
+- [✅] Implement user login.
+- [✅] Generate JWT.
 - [ ] Add auth middleware for protected routes.
 - [ ] CRUD endpoints for Users.
 

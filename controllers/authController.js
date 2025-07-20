@@ -29,8 +29,20 @@ module.exports = {
       });
     }),
   ],
-  loginUser: async (req, res) => {
-    const userData = req.body;
-    res.status(200).json(userData);
-  },
+
+  loginUser: [
+    ...validationRules,
+    asyncHandler(async (req, res) => {
+      validationErrorHandling(req);
+      const userData = req.body;
+      const user = await userServices.findUser(null, userData.username);
+      delete user.password;
+      const token = generateToken(user);
+      res.status(200).json({
+        data: user,
+        jwt: token,
+        message: 'Logged in successfully.',
+      });
+    }),
+  ],
 };

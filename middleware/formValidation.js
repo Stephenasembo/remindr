@@ -29,7 +29,7 @@ const validationErrorHandling = (req) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = errors.array();
-    throw new CustomError(401, 'Input Validation Error', error[0].msg);
+    throw new CustomError(400, 'Input Validation Error', error[0].msg);
   }
 };
 
