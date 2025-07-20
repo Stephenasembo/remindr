@@ -37,6 +37,19 @@ async function createUser({ username, email, password }) {
   }
 }
 
+async function findUser(id, username = null) {
+  try {
+    const where = {};
+    if (id) where.id = id;
+    else if (username) where.username = username;
+    const user = await client.user.findUnique({ where });
+    return user;
+  } catch (err) {
+    throw new CustomError(500, 'Database Error', 'Error on finding user.');
+  }
+}
+
 module.exports = {
   createUser,
+  findUser,
 };

@@ -1,6 +1,7 @@
+const asyncHandler = require('express-async-handler');
 const userServices = require('../services/user');
 const passwordUtil = require('../utils/passwordUtil');
-const asyncHandler = require('express-async-handler');
+const { generateToken } = require('../utils/jwtAuth');
 
 module.exports = {
   registerUser: asyncHandler(async (req, res) => {
@@ -11,8 +12,10 @@ module.exports = {
       password: hashedPassword,
     });
     delete user.password;
+    const token = generateToken(user);
     res.status(200).json({
       data: user,
+      jwt: token,
       message: 'User created successfully.',
     });
   }),
