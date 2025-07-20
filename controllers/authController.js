@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const userServices = require('../services/user');
-const passwordUtil = require('../utils/passwordUtil');
+const { hashInput } = require('../utils/hashUtil');
 const { generateToken } = require('../utils/jwtAuth');
 const {
   validationRules,
@@ -15,7 +15,7 @@ module.exports = {
     asyncHandler(async (req, res) => {
       validationErrorHandling(req);
       const userData = req.body;
-      const hashedPassword = await passwordUtil.hashPassword(userData.password);
+      const hashedPassword = await hashInput(userData.password);
       const user = await userServices.createUser({
         ...userData,
         password: hashedPassword,
