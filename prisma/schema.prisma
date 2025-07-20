@@ -19,7 +19,7 @@ model User {
   username   String      @unique
   email      String      @unique
   password   String
-  createdAt  DateTime    @default(now())
+  createdAt  DateTime    @default(now()) @map("created_at")
   reminders  Reminder[]  @relation("reminder_sender")
   apiKey     ApiKey?     @relation("user_api_key")
   recipients Recipient[] @relation("recipient")
