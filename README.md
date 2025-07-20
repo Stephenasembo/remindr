@@ -17,7 +17,7 @@
 
 ## Current Stage
 
-The project is currently at **[Phase 3](#️-phase-3-express-app-setup)**.
+The project is currently at **[Phase 3](#-phase-4-authentication)**.
 
 ## 🎯 Phase 1: Project Setup
 
@@ -36,10 +36,10 @@ The project is currently at **[Phase 3](#️-phase-3-express-app-setup)**.
 
 ## ⚙️ Phase 3: Express App Setup
 
-- [ ] Set up Express server with middleware.
-- [ ] Add CORS, input body parsing.
-- [ ] Configure generalized error handler.
-- [ ] Setup basic route files & folder structure.
+- [✅] Set up Express server with middleware.
+- [✅] Add CORS, input body parsing.
+- [✅] Configure generalized error handler.
+- [✅] Setup basic route files & folder structure.
 
 ---
 
