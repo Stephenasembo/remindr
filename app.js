@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const authRouter = require('./routes/authRouter');
 
 const { PORT } = process.env;
 const app = express();
@@ -16,6 +17,8 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   res.status(200).json({ data: req.body.data });
 });
+
+app.use('/auth', authRouter);
 
 app.use('/', (req, res) => {
   res.status(404).json({ error: 'Page does not exist.' });

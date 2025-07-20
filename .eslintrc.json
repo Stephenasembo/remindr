@@ -5,6 +5,7 @@
     "prettier/prettier": "error"
   },
   "env": {
-    "jest/globals": true
+    "node": true,
+    "jest": true
   }
 }
