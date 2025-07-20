@@ -8,6 +8,7 @@ const {
   validationErrorHandling,
 } = require('../middleware/formValidation');
 const CustomError = require('../utils/customError');
+const { storeKey } = require('../utils/generateApiKey');
 
 module.exports = {
   registerUser: [
@@ -23,10 +24,12 @@ module.exports = {
       });
       delete user.password;
       const token = generateToken(user);
+      const apiKey = await storeKey(user.id);
       res.status(200).json({
         data: user,
         jwt: token,
         message: 'User created successfully.',
+        apiKey,
       });
     }),
   ],

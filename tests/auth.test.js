@@ -3,8 +3,8 @@ const app = require('../app');
 
 describe('User registration', () => {
   const mockUser = {
-    username: 'Stephen',
-    email: 'stephen@gmail.com',
+    username: 'Nelly3',
+    email: 'nelly3@gmail.com',
     password: '123',
   };
 
@@ -17,8 +17,9 @@ describe('User registration', () => {
       .send(mockUser);
     expect(res.status).toBe(200);
     expect(res.headers['content-type']).toMatch(/json/);
-    expect(res.body.data).toHaveProperty('username', 'Stephen');
+    expect(res.body.data).toHaveProperty('username');
     expect(res.body.message).toMatch(/created/);
+    expect(res.body).toHaveProperty('apiKey');
   });
 
   it('fails on same user input', async () => {

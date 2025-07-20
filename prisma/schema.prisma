@@ -91,8 +91,10 @@ model ApiKey {
   userId     String    @unique @map("user_id")
   createdAt  DateTime  @default(now()) @map("created_at")
   lastUsedAt DateTime? @map("last_used_at")
-  apiHits    Int       @map("api_hits")
+  apiHits    Int       @default(0) @map("api_hits")
   isActive   Boolean   @default(true) @map("is_active")
+
+  @@map("api_keys")
 }
 
 enum Status {
