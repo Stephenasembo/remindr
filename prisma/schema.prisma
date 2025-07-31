@@ -29,13 +29,14 @@ model User {
 }
 
 model Recipient {
-  id        String     @id @default(uuid())
-  name      String?
-  email     String?
-  phone     String?
-  user      User       @relation("recipient", fields: [userId], references: [id], onDelete: Cascade)
-  userId    String     @map("user_id")
-  reminders Reminder[] @relation("reminder_recipient")
+  id         String    @id @default(uuid())
+  name       String?
+  email      String?
+  phone      String?
+  user       User      @relation("recipient", fields: [userId], references: [id], onDelete: Cascade)
+  userId     String    @map("user_id")
+  reminders  Reminder? @relation("reminder_recipient", fields: [reminderId], references: [id])
+  reminderId String?
 
   @@map("recipients")
 }
@@ -52,23 +53,21 @@ model Profile {
 }
 
 model Reminder {
-  id          String       @id @default(uuid())
-  title       String
-  content     String?
-  dueDate     DateTime     @map("due_date")
-  recurring   Boolean      @default(false)
-  interval    String?
-  createdAt   DateTime     @default(now()) @map("created_at")
-  updatedAt   DateTime?    @map("updated_at")
-  isDue       Boolean      @default(false) @map("is_due")
-  recipient   Recipient    @relation("reminder_recipient", fields: [recipientId], references: [id])
-  recipientId String       @map("recipient_id")
-  channel     Channel      @default(EMAIL)
-  status      Status       @default(NOT_SENT)
-  sender      User         @relation("reminder_sender", fields: [senderId], references: [id], onDelete: Cascade)
-  senderId    String       @map("sender_id")
-  log         ReminderLog? @relation("reminder_log")
-  logId       String       @map("log_id")
+  id         String        @id @default(uuid())
+  title      String
+  content    String?
+  dueDate    DateTime      @map("due_date")
+  recurring  Boolean       @default(false)
+  interval   String?
+  createdAt  DateTime      @default(now()) @map("created_at")
+  updatedAt  DateTime?     @map("updated_at")
+  isDue      Boolean       @default(false) @map("is_due")
+  recipients Recipient[]   @relation("reminder_recipient")
+  channel    Channel       @default(EMAIL)
+  status     Status        @default(NOT_SENT)
+  sender     User          @relation("reminder_sender", fields: [senderId], references: [id], onDelete: Cascade)
+  senderId   String        @map("sender_id")
+  log        ReminderLog[] @relation("reminder_log")
 
   @@map("reminders")
 }
@@ -76,7 +75,7 @@ model Reminder {
 model ReminderLog {
   id         String   @id @default(uuid())
   reminder   Reminder @relation("reminder_log", fields: [reminderId], references: [id])
-  reminderId String   @unique @map("reminder_id")
+  reminderId String   @map("reminder_id")
   status     Status
   timestamp  DateTime @default(now())
   message    String?
