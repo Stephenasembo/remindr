@@ -86,9 +86,26 @@ async function updateRecipient(id, { name, email, phone }) {
   }
 }
 
+async function deleteRecipient(id) {
+  try {
+    const recipient = await client.recipient.delete({
+      where: { id },
+    });
+    return recipient;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      `An error occured on deleting recipient with id: ${id}`
+    );
+  }
+}
+
 module.exports = {
   createRecipient,
   getRecipients,
   getRecipient,
   updateRecipient,
+  deleteRecipient,
 };

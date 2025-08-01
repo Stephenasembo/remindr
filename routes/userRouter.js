@@ -6,6 +6,7 @@ router.post('/recipients', controller.createRecipient);
 router.get('/recipients', controller.getRecipients);
 router.get('/recipients/:recipientId', controller.getRecipient);
 router.put('/recipients/:recipientId', controller.updateRecipient);
+router.delete('/recipients/:recipientId', controller.deleteRecipient);
 
 router.use(errorHandler);
 

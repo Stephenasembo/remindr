@@ -39,10 +39,18 @@ module.exports = {
       recipientId,
       formData
     );
-    console.log(recipient);
     res.status(200).json({
       data: recipient,
       message: 'Recipient updated successfully.',
+    });
+  }),
+
+  deleteRecipient: asyncHandler(async (req, res) => {
+    const { recipientId } = req.params;
+    const recipient = await recipientServices.deleteRecipient(recipientId);
+    res.status(200).json({
+      data: recipient,
+      message: 'Recipient deleted successfully.',
     });
   }),
 };

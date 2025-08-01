@@ -45,7 +45,7 @@ describe('Recipient logic', () => {
     expect(res.body.message).toMatch(/fetched successfully/);
   });
 
-  it.only('updates recipient information', async () => {
+  it('updates recipient information', async () => {
     const res = await request(app)
       .put(`/user/recipients/${recipientId}`)
       .set('Accept', 'application/json')
@@ -57,5 +57,17 @@ describe('Recipient logic', () => {
     expect(res.headers['content-type']).toMatch(/json/);
     expect(res.body.data.name).toBe('Mercy');
     expect(res.body.message).toMatch(/updated successfully/);
+  });
+
+  // It will throw an error on the second run after record is deleted
+  it.skip('deletes recipient', async () => {
+    const res = await request(app)
+      .delete(`/user/recipients/${recipientId}`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json');
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toMatch(/json/);
+    expect(res.body.data.name).toBe('Mercy');
+    expect(res.body.message).toMatch(/deleted successfully/);
   });
 });
