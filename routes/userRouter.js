@@ -7,6 +7,7 @@ router.get('/recipients', controller.getRecipients);
 router.get('/recipients/:recipientId', controller.getRecipient);
 router.put('/recipients/:recipientId', controller.updateRecipient);
 router.delete('/recipients/:recipientId', controller.deleteRecipient);
+router.delete('/recipients', controller.deleteRecipients);
 
 router.use(errorHandler);
 

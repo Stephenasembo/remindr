@@ -11,7 +11,7 @@ describe('Recipient logic', () => {
   const recipientId = '28a34f68-4e26-4308-972d-84c23acc08ac';
 
   // Recipient gets duplicated if test is not skipped
-  it.skip('creates recipient successfully', async () => {
+  it('creates recipient successfully', async () => {
     const res = await request(app)
       .post(`/user/recipients`)
       .set('Accept', 'application/json')
@@ -68,6 +68,16 @@ describe('Recipient logic', () => {
     expect(res.status).toBe(200);
     expect(res.headers['content-type']).toMatch(/json/);
     expect(res.body.data.name).toBe('Mercy');
+    expect(res.body.message).toMatch(/deleted successfully/);
+  });
+
+  it.only(`deletes all user's recipients`, async () => {
+    const res = await request(app)
+      .delete(`/user/recipients`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json');
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toMatch(/json/);
     expect(res.body.message).toMatch(/deleted successfully/);
   });
 });

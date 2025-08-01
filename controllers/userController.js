@@ -53,4 +53,14 @@ module.exports = {
       message: 'Recipient deleted successfully.',
     });
   }),
+
+  deleteRecipients: asyncHandler(async (req, res) => {
+    const userId = '77816efa-838d-49bb-a92f-7541a3e7365f';
+    const recipients = await recipientServices.deleteRecipients(userId);
+    console.log(recipients);
+    res.status(200).json({
+      data: recipients,
+      message: 'All recipients deleted successfully.',
+    });
+  }),
 };

@@ -102,10 +102,27 @@ async function deleteRecipient(id) {
   }
 }
 
+async function deleteRecipients(userId) {
+  try {
+    const recipients = await client.recipient.deleteMany({
+      where: { userId },
+    });
+    return recipients;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      `An error occured on deleting recipients for user with id: ${userId}`
+    );
+  }
+}
+
 module.exports = {
   createRecipient,
   getRecipients,
   getRecipient,
   updateRecipient,
   deleteRecipient,
+  deleteRecipients,
 };
