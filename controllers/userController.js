@@ -31,4 +31,18 @@ module.exports = {
       message: 'Recipient fetched successfully.',
     });
   }),
+
+  updateRecipient: asyncHandler(async (req, res) => {
+    const { recipientId } = req.params;
+    const formData = req.body;
+    const recipient = await recipientServices.updateRecipient(
+      recipientId,
+      formData
+    );
+    console.log(recipient);
+    res.status(200).json({
+      data: recipient,
+      message: 'Recipient updated successfully.',
+    });
+  }),
 };

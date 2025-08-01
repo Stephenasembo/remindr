@@ -44,4 +44,18 @@ describe('Recipient logic', () => {
     expect(res.body.data).toHaveProperty('name');
     expect(res.body.message).toMatch(/fetched successfully/);
   });
+
+  it.only('updates recipient information', async () => {
+    const res = await request(app)
+      .put(`/user/recipients/${recipientId}`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send({
+        name: 'Mercy',
+      });
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toMatch(/json/);
+    expect(res.body.data.name).toBe('Mercy');
+    expect(res.body.message).toMatch(/updated successfully/);
+  });
 });

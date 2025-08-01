@@ -5,6 +5,7 @@ const { errorHandler } = require('../middleware/errorHandler');
 router.post('/recipients', controller.createRecipient);
 router.get('/recipients', controller.getRecipients);
 router.get('/recipients/:recipientId', controller.getRecipient);
+router.put('/recipients/:recipientId', controller.updateRecipient);
 
 router.use(errorHandler);
 

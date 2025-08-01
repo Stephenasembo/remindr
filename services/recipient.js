@@ -65,8 +65,30 @@ async function getRecipient(id) {
   }
 }
 
+async function updateRecipient(id, { name, email, phone }) {
+  try {
+    const recipient = await client.recipient.update({
+      where: { id },
+      data: {
+        name: name || '',
+        email: email || '',
+        phone: phone || '',
+      },
+    });
+    return recipient;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      `An error occured on updating recipient with id: ${id}`
+    );
+  }
+}
+
 module.exports = {
   createRecipient,
   getRecipients,
   getRecipient,
+  updateRecipient,
 };
