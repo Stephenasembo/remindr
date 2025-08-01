@@ -22,4 +22,13 @@ module.exports = {
       message: 'Recipients fetched successfully.',
     });
   }),
+
+  getRecipient: asyncHandler(async (req, res) => {
+    const { recipientId } = req.params;
+    const recipient = await recipientServices.getRecipient(recipientId);
+    res.status(200).json({
+      data: recipient,
+      message: 'Recipient fetched successfully.',
+    });
+  }),
 };

@@ -49,7 +49,24 @@ async function getRecipients(userId) {
   }
 }
 
+async function getRecipient(id) {
+  try {
+    const recipient = await client.recipient.findUnique({
+      where: { id },
+    });
+    return recipient;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      `An error occured on fetching recipient with id: ${id}`
+    );
+  }
+}
+
 module.exports = {
   createRecipient,
   getRecipients,
+  getRecipient,
 };
