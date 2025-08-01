@@ -33,6 +33,23 @@ async function createRecipient(userId, { name, email, phone }) {
   }
 }
 
+async function getRecipients(userId) {
+  try {
+    const recipients = await client.recipient.findMany({
+      where: { userId },
+    });
+    return recipients;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      `An error occured on fetching user's recipients`
+    );
+  }
+}
+
 module.exports = {
   createRecipient,
+  getRecipients,
 };

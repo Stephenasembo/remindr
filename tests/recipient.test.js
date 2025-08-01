@@ -19,4 +19,15 @@ describe('Recipient logic', () => {
     expect(res.body.data).toHaveProperty('name');
     expect(res.body.message).toMatch(/created/);
   });
+
+  it.only(`fetches user's recipients`, async () => {
+    const res = await request(app)
+      .get('/user/recipients')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json');
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toMatch(/json/);
+    expect(res.body.data[0]).toHaveProperty('email');
+    expect(res.body.message).toMatch(/fetched successfully/);
+  });
 });
