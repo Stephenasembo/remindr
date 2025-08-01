@@ -1,0 +1,17 @@
+const asyncHandler = require('express-async-handler');
+const recipientServices = require('../services/recipient');
+
+module.exports = {
+  createRecipient: asyncHandler(async (req, res) => {
+    const recipientData = req.body;
+    const userId = '77816efa-838d-49bb-a92f-7541a3e7365f';
+    const recipient = await recipientServices.createRecipient(
+      userId,
+      recipientData
+    );
+    res.status(200).json({
+      data: recipient,
+      message: 'Recipient created successfully.',
+    });
+  }),
+};
