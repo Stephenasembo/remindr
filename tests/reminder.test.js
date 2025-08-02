@@ -2,9 +2,9 @@ const request = require('supertest');
 const app = require('../app');
 
 describe('Reminder CRUD', () => {
-  const date = new Date('2025-09-01T10:30');
+  const date = new Date('2025-09-01T10:30').toISOString();
   const mockReminder = {
-    title: 'Test',
+    title: 'Test1',
     dueDate: date,
     senderId: '77816efa-838d-49bb-a92f-7541a3e7365f',
   };
@@ -14,7 +14,7 @@ describe('Reminder CRUD', () => {
 
   const reminderId = 'ae46cf7c-dbf7-4a24-a474-8b5da106cd3c';
 
-  it.skip('creates a reminder', async () => {
+  it.only('creates a reminder', async () => {
     const res = await request(app)
       .post('/reminders')
       .set('Accept', 'application/json')
