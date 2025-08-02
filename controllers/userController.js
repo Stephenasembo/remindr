@@ -72,4 +72,13 @@ module.exports = {
       message: `User's reminders fetched successfully.`,
     });
   }),
+
+  deleteUserReminders: asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const reminders = await reminderService.deleteUserReminders(userId);
+    res.status(200).json({
+      data: reminders,
+      message: `User's reminders deleted successfully.`,
+    });
+  }),
 };

@@ -97,9 +97,43 @@ async function updateReminder(
   }
 }
 
+async function deleteReminder(id) {
+  try {
+    const reminder = await client.reminder.delete({
+      where: { id },
+    });
+    return reminder;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      `An error occured on deleting reminder with id: ${id}`
+    );
+  }
+}
+
+async function deleteUserReminders(senderId) {
+  try {
+    const reminders = await client.reminder.deleteMany({
+      where: { senderId },
+    });
+    return reminders;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      `An error occured on deleting reminders for user with id: ${senderId}`
+    );
+  }
+}
+
 module.exports = {
   createReminder,
   getReminder,
   getUserReminders,
   updateReminder,
+  deleteReminder,
+  deleteUserReminders,
 };

@@ -7,6 +7,7 @@ router.use(authorizeUser);
 router.post('/', controller.createReminder);
 router.get('/:reminderId', controller.getReminder);
 router.put('/:reminderId', controller.updateReminder);
+router.delete('/:reminderId', controller.deleteReminder);
 router.use(errorHandler);
 
 module.exports = router;

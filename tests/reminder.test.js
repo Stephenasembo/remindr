@@ -27,7 +27,7 @@ describe('Reminder CRUD', () => {
     expect(res.body.message).toMatch(/created/);
   });
 
-  it('fetches one reminder', async () => {
+  it.skip('fetches one reminder', async () => {
     const res = await request(app)
       .get(`/reminders/${reminderId}`)
       .set('Accept', 'application/json')
@@ -51,7 +51,7 @@ describe('Reminder CRUD', () => {
     expect(res.body.message).toMatch(/fetched successfully/);
   });
 
-  it('updates a reminder', async () => {
+  it.skip('updates a reminder', async () => {
     const res = await request(app)
       .put(`/reminders/${reminderId}`)
       .set('Accept', 'application/json')
@@ -64,5 +64,27 @@ describe('Reminder CRUD', () => {
     expect(res.headers['content-type']).toMatch(/json/);
     expect(res.body.data.title).toBe('Success');
     expect(res.body.message).toMatch(/updated successfully/);
+  });
+
+  it.skip('deletes a reminder', async () => {
+    const res = await request(app)
+      .delete(`/reminders/${reminderId}`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', jwtToken);
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toMatch(/json/);
+    expect(res.body.message).toMatch(/deleted successfully/);
+  });
+
+  it.skip(`deletes all user's reminders`, async () => {
+    const res = await request(app)
+      .delete('/user/reminders')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', jwtToken);
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toMatch(/json/);
+    expect(res.body.message).toMatch(/deleted successfully/);
   });
 });

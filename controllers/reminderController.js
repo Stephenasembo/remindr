@@ -33,4 +33,13 @@ module.exports = {
       message: 'Reminder updated successfully.',
     });
   }),
+
+  deleteReminder: asyncHandler(async (req, res) => {
+    const { reminderId } = req.params;
+    const reminder = await reminderService.deleteReminder(reminderId);
+    res.status(200).json({
+      data: reminder,
+      message: 'Reminder deleted successfully.',
+    });
+  }),
 };
