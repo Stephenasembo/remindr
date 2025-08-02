@@ -20,4 +20,17 @@ module.exports = {
       message: 'Reminder fetched successfully.',
     });
   }),
+
+  updateReminder: asyncHandler(async (req, res) => {
+    const { reminderId } = req.params;
+    const reminderData = req.body;
+    const reminder = await reminderService.updateReminder(
+      reminderId,
+      reminderData
+    );
+    res.status(200).json({
+      data: reminder,
+      message: 'Reminder updated successfully.',
+    });
+  }),
 };

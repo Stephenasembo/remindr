@@ -50,4 +50,19 @@ describe('Reminder CRUD', () => {
     expect(res.body.data[0]).toHaveProperty('title');
     expect(res.body.message).toMatch(/fetched successfully/);
   });
+
+  it('updates a reminder', async () => {
+    const res = await request(app)
+      .put(`/reminders/${reminderId}`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', jwtToken)
+      .send({
+        title: 'Success',
+      });
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toMatch(/json/);
+    expect(res.body.data.title).toBe('Success');
+    expect(res.body.message).toMatch(/updated successfully/);
+  });
 });

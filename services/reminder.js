@@ -67,8 +67,39 @@ async function getUserReminders(senderId) {
   }
 }
 
+async function updateReminder(
+  id,
+  { title, content, dueDate, recurring, interval, isDue, status, channel }
+) {
+  try {
+    const initial = await getReminder(id);
+    const reminder = await client.reminder.update({
+      where: { id },
+      data: {
+        title: title || initial.title,
+        content: content || initial.content,
+        dueDate: dueDate || initial.dueDate,
+        recurring: recurring || initial.recurring,
+        interval: interval || initial.interval,
+        isDue: isDue || initial.isDue,
+        status: status || initial.status,
+        channel: channel || initial.channel,
+      },
+    });
+    return reminder;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      `An error occured on updating reminder with id: ${id}`
+    );
+  }
+}
+
 module.exports = {
   createReminder,
   getReminder,
   getUserReminders,
+  updateReminder,
 };
