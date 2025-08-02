@@ -57,7 +57,7 @@ The project is currently at **[Phase 5](#-phase-5-reminder-system-logic)**.
 
 - [✅] CRUD endpoints for Reminders.
 - [✅] Validate reminder creation inputs.
-- [ ] Add ownership checks.
+- [✅] Add ownership checks.
 - [ ] Flag reminders as "due" based on schedule logic.
 
 ---
