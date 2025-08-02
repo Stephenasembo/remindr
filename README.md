@@ -17,7 +17,7 @@
 
 ## Current Stage
 
-The project is currently at **[Phase 4](#-phase-4-authentication)**.
+The project is currently at **[Phase 5](#-phase-5-reminder-system-logic)**.
 
 ## 🎯 Phase 1: Project Setup
 
@@ -55,7 +55,7 @@ The project is currently at **[Phase 4](#-phase-4-authentication)**.
 
 ## 📬 Phase 5: Reminder System Logic
 
-- [ ] CRUD endpoints for Reminders.
+- [✅] CRUD endpoints for Reminders.
 - [ ] Validate reminder creation inputs.
 - [ ] Add ownership checks.
 - [ ] Flag reminders as "due" based on schedule logic.
