@@ -4,7 +4,7 @@ const recipientServices = require('../services/recipient');
 module.exports = {
   createRecipient: asyncHandler(async (req, res) => {
     const recipientData = req.body;
-    const userId = '77816efa-838d-49bb-a92f-7541a3e7365f';
+    const userId = req.user.id;
     const recipient = await recipientServices.createRecipient(
       userId,
       recipientData
@@ -15,7 +15,7 @@ module.exports = {
     });
   }),
   getRecipients: asyncHandler(async (req, res) => {
-    const userId = '77816efa-838d-49bb-a92f-7541a3e7365f';
+    const userId = req.user.id;
     const recipients = await recipientServices.getRecipients(userId);
     res.status(200).json({
       data: recipients,
@@ -55,9 +55,8 @@ module.exports = {
   }),
 
   deleteRecipients: asyncHandler(async (req, res) => {
-    const userId = '77816efa-838d-49bb-a92f-7541a3e7365f';
+    const userId = req.user.id;
     const recipients = await recipientServices.deleteRecipients(userId);
-    console.log(recipients);
     res.status(200).json({
       data: recipients,
       message: 'All recipients deleted successfully.',
