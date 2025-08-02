@@ -11,4 +11,13 @@ module.exports = {
       message: 'Reminder created successfully.',
     });
   }),
+
+  getReminder: asyncHandler(async (req, res) => {
+    const { reminderId } = req.params;
+    const reminder = await reminderService.getReminder(reminderId);
+    res.status(200).json({
+      data: reminder,
+      message: 'Reminder fetched successfully.',
+    });
+  }),
 };

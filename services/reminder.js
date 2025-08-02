@@ -30,11 +30,45 @@ async function createReminder(
     throw new CustomError(
       '500',
       'Server Error',
-      'An error occured oncreating the reminder.'
+      'An error occured on creating the reminder.'
+    );
+  }
+}
+
+async function getReminder(id) {
+  try {
+    const reminder = await client.reminder.findUnique({
+      where: { id },
+    });
+    return reminder;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      '500',
+      'Server Error',
+      'An error occured on updating the reminder.'
+    );
+  }
+}
+
+async function getUserReminders(senderId) {
+  try {
+    const reminders = await client.reminder.findMany({
+      where: { senderId },
+    });
+    return reminders;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      '500',
+      'Server Error',
+      'An error occured on updating the reminder.'
     );
   }
 }
 
 module.exports = {
   createReminder,
+  getReminder,
+  getUserReminders,
 };

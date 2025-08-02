@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const recipientServices = require('../services/recipient');
+const reminderService = require('../services/reminder');
 
 module.exports = {
   createRecipient: asyncHandler(async (req, res) => {
@@ -60,6 +61,15 @@ module.exports = {
     res.status(200).json({
       data: recipients,
       message: 'All recipients deleted successfully.',
+    });
+  }),
+
+  getUserReminders: asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const reminders = await reminderService.getUserReminders(userId);
+    res.status(200).json({
+      data: reminders,
+      message: `User's reminders fetched successfully.`,
     });
   }),
 };
