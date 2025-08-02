@@ -1,0 +1,10 @@
+const router = require('express').Router();
+const controller = require('../controllers/reminderController');
+const { errorHandler } = require('../middleware/errorHandler');
+const authorizeUser = require('../middleware/authorizeUser');
+
+router.use(authorizeUser);
+router.post('/', controller.createReminder);
+router.use(errorHandler);
+
+module.exports = router;
