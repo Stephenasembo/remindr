@@ -129,6 +129,39 @@ async function deleteUserReminders(senderId) {
   }
 }
 
+async function getAllDbReminders() {
+  try {
+    const reminders = await client.reminder.findMany();
+    return reminders;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      'An error occured on fetching all database reminders.'
+    );
+  }
+}
+
+async function flagReminder(id) {
+  try {
+    const reminder = await client.reminder.update({
+      where: { id },
+      data: {
+        isDue: true,
+      },
+    });
+    return reminder;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      `An error occured on flagging reminder with id: ${id} as due.`
+    );
+  }
+}
+
 module.exports = {
   createReminder,
   getReminder,
@@ -136,4 +169,6 @@ module.exports = {
   updateReminder,
   deleteReminder,
   deleteUserReminders,
+  getAllDbReminders,
+  flagReminder,
 };
