@@ -178,6 +178,23 @@ async function findDueReminders() {
   }
 }
 
+async function updateStatus(id, status) {
+  try {
+    const reminder = await client.reminder.update({
+      where: { id },
+      data: { status },
+    });
+    return reminder;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      'An error occured on updating reminder status.'
+    );
+  }
+}
+
 module.exports = {
   createReminder,
   getReminder,
@@ -188,4 +205,5 @@ module.exports = {
   getAllDbReminders,
   flagReminder,
   findDueReminders,
+  updateStatus,
 };
