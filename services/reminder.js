@@ -162,6 +162,22 @@ async function flagReminder(id) {
   }
 }
 
+async function findDueReminders() {
+  try {
+    const reminders = await client.reminder.findMany({
+      where: { isDue: true },
+    });
+    return reminders;
+  } catch (err) {
+    console.error(err);
+    throw new CustomError(
+      500,
+      'Server Error',
+      'An error occured on fetching due reminders.'
+    );
+  }
+}
+
 module.exports = {
   createReminder,
   getReminder,
@@ -171,4 +187,5 @@ module.exports = {
   deleteUserReminders,
   getAllDbReminders,
   flagReminder,
+  findDueReminders,
 };

@@ -18,7 +18,7 @@ const users = [
 const reminders = [
   {
     title: 'Call Mom',
-    dueDate: new Date('2025-09-01T10:30').toISOString(),
+    dueDate: new Date('2025-08-04T15:12').toISOString(),
   },
   {
     title: 'Walk the dog',
