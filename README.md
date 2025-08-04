@@ -58,17 +58,17 @@ The project is currently at **[Phase 5](#-phase-5-reminder-system-logic)**.
 - [✅] CRUD endpoints for Reminders.
 - [✅] Validate reminder creation inputs.
 - [✅] Add ownership checks.
-- [ ] Flag reminders as "due" based on schedule logic.
+- [✅] Flag reminders as "due" based on schedule logic.
 
 ---
 
 ## ⏰ Phase 6: Scheduler And Notification Service
 
-- [ ] Setup background job processor.
-- [ ] Create job to scan for due reminders at intervals.
+- [✅] Setup background job processor.
+- [✅] Create job to scan for due reminders at intervals.
 - [ ] Send out notifications.
-- [ ] Update reminder status after sending.
-- [ ] Auto deletion of sent reminders.
+- [✅] Update reminder status after sending.
+- [✅] Auto deletion of sent reminders.
 
 ---
 
