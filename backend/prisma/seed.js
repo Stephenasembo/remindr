@@ -1,6 +1,7 @@
 const { createUser } = require('../services/user');
 const { createReminder } = require('../services/reminder');
 const { createRecipient } = require('../services/recipient');
+const { hashInput } = require('../utils/hashUtil');
 
 const users = [
   {
@@ -81,7 +82,12 @@ async function addRecipients() {
 }
 
 async function seedDb() {
-  const addedUsers = await Promise.all(users.map((user) => createUser(user)));
+  const addedUsers = await Promise.all(
+    users.map(async (user) => {
+      user.password = await hashInput(user.password);
+      return createUser(user);
+    })
+  );
   addUserId(addedUsers[0].id, addedUsers[1].id);
   await addReminder();
   await addRecipients();
